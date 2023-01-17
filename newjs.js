@@ -25,4 +25,10 @@ items[1].style.fontWeight='700'
 //var titles=document.querySelectorAll('.title')
 //console.log(titles)
 //titles[0].style.color='green'
+var li= document.getElementsByTagName('li')
+console.log(li)
+console.log(li[1]);
+li[1].textContent= 'hello 2'
+li[1].fontWeight='bold';
+li[4].style.background='yellow'
 
