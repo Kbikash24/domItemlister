@@ -26,11 +26,16 @@ function addItem(e){
   // Create del button element
   var deleteBtn = document.createElement('button');
 
+  
+
   // Add classes to del button
   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
 
+ 
+
   // Append text node
   deleteBtn.appendChild(document.createTextNode('X'));
+  
 
   // Append button to li
   li.appendChild(deleteBtn);
@@ -65,3 +70,15 @@ function filterItems(e){
     }
   });
 }
+// Select the existing delete button
+var existingBtn = document.querySelector(".btn.btn-danger.btn-sm.float-right.delete");
+
+// Create a new button element for edit
+var newBtn = document.createElement("BUTTON");
+newBtn.innerHTML = "EDIT";
+
+// Insert the new button next to the existing button
+existingBtn.insertAdjacentElement("afterend", newBtn);
+
+newBtn.classList.add("btn", "btn-info", "btn-sm", "float-right", "edit");
+
