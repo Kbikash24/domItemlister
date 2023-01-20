@@ -9,19 +9,26 @@ itemList.addEventListener('click', removeItem);
 // Filter event
 filter.addEventListener('keyup', filterItems);
 
+
+
 // Add item
 function addItem(e){
   e.preventDefault();
 
   // Get input value
-  var newItem = document.getElementById('item').value;
-
+  var inputValue = document.getElementById('item').value;
+var description = document.getElementById('description').value;
   // Create new li element
   var li = document.createElement('li');
   // Add class
   li.className = 'list-group-item';
   // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
+var newText =document.createTextNode(inputValue)
+var descriptionNode = document.createTextNode(" "+description)
+
+  li.appendChild(newText);
+  li.appendChild(descriptionNode);
+
 
   // Create del button element
   var deleteBtn = document.createElement('button');
@@ -42,6 +49,8 @@ function addItem(e){
 
   // Append li to list
   itemList.appendChild(li);
+
+  
 }
 
 // Remove item
@@ -53,7 +62,6 @@ function removeItem(e){
     }
   }
 }
-
 // Filter Items
 function filterItems(e){
   // convert text to lowercase
@@ -70,15 +78,16 @@ function filterItems(e){
     }
   });
 }
-// Select the existing delete button
-var existingBtn = document.querySelector(".btn.btn-danger.btn-sm.float-right.delete");
 
-// Create a new button element for edit
-var newBtn = document.createElement("BUTTON");
-newBtn.innerHTML = "EDIT";
+//Select all of the delete buttons
+var deleteButtons = document.querySelectorAll(".btn.btn-danger.btn-sm.float-right.delete");
 
-// Insert the new button next to the existing button
-existingBtn.insertAdjacentElement("afterend", newBtn);
-
-newBtn.classList.add("btn", "btn-info", "btn-sm", "float-right", "edit");
-
+// Iterate over each delete button
+deleteButtons.forEach(function(deleteBtn){
+  // Create a new button element for edit
+  var newBtn = document.createElement("BUTTON");
+  newBtn.innerHTML = "EDIT";
+  newBtn.classList.add("btn", "btn", "btn-sm", "float-right", "edit");
+  // Insert the new button next to the existing button
+  deleteBtn.insertAdjacentElement("beforebegin", newBtn);
+});
