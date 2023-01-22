@@ -1,6 +1,7 @@
 // Get the form element
 const form = document.querySelector("#my-form");
 const msg = document.querySelector(".msg");
+const usersList = document.querySelector("#users");
 
 // Listen for the submit event on the form
 form.addEventListener("submit", (e) => {
@@ -28,7 +29,10 @@ form.addEventListener("submit", (e) => {
     email
   };
 
-  // Check if there is already a "users" key in local storage
+  // Create a list item element to display the new user
+  const li = document.createElement("li");
+  li.innerHTML = `${user.name} - ${user.email}`;
+
   if (localStorage.getItem("users")) {
     // If so, get the existing users
     let users = JSON.parse(localStorage.getItem("users"));
@@ -41,10 +45,36 @@ form.addEventListener("submit", (e) => {
   } else {
     // If not, create a new array with the new user
     const users = [user];
-
-    // Save the new array of users to local storage
     localStorage.setItem("users", JSON.stringify(users));
+
   }
-  msg.innerHTML = "";
+  // Create a delete button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = " Delete";
+  deleteBtn.style.padding='3px 3px'
+  deleteBtn.style.borderRadius='5px'
+  deleteBtn.style.margin='15px'
+  deleteBtn.classList.add("delete-btn");
+  deleteBtn.onclick = function() {
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    // Filter out the user that you want to delete
+    users = users.filter((u) => u.email !== user.email);
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    // Remove the list item element from the UI
+    li.remove();
+  
+  
+  };
+
+  // Append the delete button to the list item
+  li.appendChild(deleteBtn);
+
+  // Append the list item to the unordered list element
+  usersList.appendChild(li);
+
+  // Clear the form fields
   form.reset();
 });
