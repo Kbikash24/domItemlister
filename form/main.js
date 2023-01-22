@@ -48,12 +48,30 @@ form.addEventListener("submit", (e) => {
     localStorage.setItem("users", JSON.stringify(users));
 
   }
+  // craete a edit button
+  const editBtn = document.createElement("button");
+  editBtn.innerHTML= "Edit"
+  editBtn.classList.add("edit-btn")
+  editBtn.style.padding='3px 9px'
+  editBtn.style.borderRadius='5px'
+  editBtn.style.margin='5px'
+  editBtn.onclick= function(){
+    let users = JSON.parse(localStorage.getItem("users"));
+    document.getElementById("name").value =user.name;
+      document.getElementById("email").value = user.email;
+      localStorage.removeItem("user");
+
+
+  }
+li.append(editBtn)
+
+  
   // Create a delete button
   const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = " Delete";
   deleteBtn.style.padding='3px 3px'
   deleteBtn.style.borderRadius='5px'
-  deleteBtn.style.margin='15px'
+  deleteBtn.style.margin='2px'
   deleteBtn.classList.add("delete-btn");
   deleteBtn.onclick = function() {
     let users = JSON.parse(localStorage.getItem("users"));
@@ -78,3 +96,13 @@ form.addEventListener("submit", (e) => {
   // Clear the form fields
   form.reset();
 });
+// Create an edit button
+const editBtn = document.createElement("button");
+editBtn.innerHTML = "Edit";
+editBtn.classList.add("edit-btn");
+li.appendChild(editBtn);
+editBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  li.classList.toggle("edit-mode");
+});
+
